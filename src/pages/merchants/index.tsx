@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import AddMerchant from "./AddMerchant";
-import MerchantsTable from "./MerchantsTable";
+
+import MerchantsTable from "../../components/merchantComps/MerchantsTable";
 import { IMerchantData } from "@/types/merchant";
 import { IPageMeta } from "@/types/pageMeta";
 import API from "@/network/api";
 import { toast } from "react-toastify";
 import AuthLayout from "@/layout/AuthLayout";
 import { getSession, signOut, useSession } from "next-auth/react";
+import AddMerchant from "@/components/merchantComps/AddMerchant";
 
 const Page = () => {
   const [isLoadingData, setIsLoadingData] = useState(false);

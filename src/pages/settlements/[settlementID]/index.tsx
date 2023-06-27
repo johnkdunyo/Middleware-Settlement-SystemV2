@@ -1,5 +1,5 @@
 import React, { SetStateAction, useState, useEffect } from "react";
-import SettlementStatusHeader from "./SettlementStatusHeader";
+import SettlementStatusHeader from "../../../components/settlements/SettlementStatusHeader";
 
 import API from "@/network/api";
 

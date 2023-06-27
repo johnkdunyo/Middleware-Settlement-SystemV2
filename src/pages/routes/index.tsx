@@ -5,11 +5,11 @@ import TableLoader from "@/components/tables/TableLoader";
 import TableNoDataFound from "@/components/tables/TableNoDataFound";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Modal from "@/components/modals";
-import UpdateRoute from "./UpdateRoute";
-import AddRoute from "./AddRoute";
+import AddRoute from "../../components/routeComps/AddRoute";
 import { toast } from "react-toastify";
 import AuthLayout from "@/layout/AuthLayout";
 import { getSession, signOut, useSession } from "next-auth/react";
+import UpdateRoute from "@/components/routeComps/UpdateRoute";
 
 interface SingleTableRowProps {
   title: string;

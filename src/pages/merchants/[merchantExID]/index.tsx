@@ -1,14 +1,14 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import MerchantSummary from "./MerchantSummary";
 import Link from "next/link";
-import MerchantRoutesTab from "./MerchantRoutesTab";
-import MerchantTerminalsTab from "./MerchantTerminalsTab";
 import API from "@/network/api";
 import { IMerchantDetails } from "@/types/merchant";
 import AuthLayout from "@/layout/AuthLayout";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import MerchantSummary from "@/components/merchantComps/details/MerchantSummary";
+import MerchantRoutesTab from "@/components/merchantComps/details/MerchantRoutesTab";
+import MerchantTerminalsTab from "@/components/merchantComps/details/MerchantTerminalsTab";
 
 // type Params = {
 //   params: {

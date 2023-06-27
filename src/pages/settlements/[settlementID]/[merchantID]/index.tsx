@@ -1,18 +1,8 @@
-"use client";
-
-import AuthLayout from "@/layouts/AuthLayout";
 import React, { SetStateAction, useState } from "react";
-import SettlementByMerchantStatusHeader from "./SettlementByMerchantStatusHeader";
-import SettlementByMerchantSummary from "./SettlementByMerchantSummary";
-import SettlementByMerchantTerminalsTab from "./SettlementByMerchantTerminalsTab";
-import TransactionsTab from "../TransactionsTab";
-import SettlementByMerchantTransactionsTab from "./SettlementByMerchantTransactionsTab";
-
-type Params = {
-  params: {
-    merchantID: number;
-  };
-};
+import SettlementByMerchantStatusHeader from "../../../../components/settlements/details/SettlementByMerchantStatusHeader";
+import AuthLayout from "@/layout/AuthLayout";
+import SettlementByMerchantSummary from "@/components/settlements/details/SettlementByMerchantSummary";
+import SettlementByMerchantTransactionsTab from "@/components/settlements/details/SettlementByMerchantTransactionsTab";
 
 interface ITabs {
   id: number;
@@ -56,11 +46,7 @@ const SettlementTabButton = ({
   );
 };
 
-export default function SettlementDetailsPage({
-  params: { merchantID },
-}: Params) {
-  console.log("debug settlememtId", merchantID);
-
+export default function SettlementDetailsPage() {
   const [currentTab, setCurrenTab] = useState(settlementTabs[1]);
 
   return (
