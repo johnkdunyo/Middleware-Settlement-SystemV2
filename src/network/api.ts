@@ -1,7 +1,7 @@
 'use client'
 
 import axios, { AxiosError, AxiosResponse } from "axios";
-// import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 
 
@@ -13,21 +13,22 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
   return response;
 };
 
-// const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-//   if (error.response?.statusText === "Unauthorized") {
-//     signOut({callbackUrl: "/signin"});
-//   }
-//   if (error.response?.status === 442) {
-//     signOut({callbackUrl: "/signin"});
-//   }
+const onResponseError = (error: AxiosError): Promise<AxiosError> => {
+  if (error.response?.statusText === "Unauthorized") {
+    signOut({callbackUrl: "/auth/signin"});
+  }
+  if (error.response?.status === 442) {
+    signOut({callbackUrl: "/auth/signin"});
+  }
 
-//   return Promise.reject(error);
-// };
+  return Promise.reject(error);
+};
 
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
+
 
 
 
@@ -41,6 +42,6 @@ instance.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // remove x-powered by ...
 delete instance.defaults.headers.common["X-Powered-By"];
 
-// instance.interceptors.response.use(onResponse, onResponseError);
+instance.interceptors.response.use(onResponse, onResponseError);
 
 export default instance;

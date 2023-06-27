@@ -73,7 +73,7 @@ const UserButton = () => {
           >
             <li>
               <button
-                onClick={() => signOut({ callbackUrl: "/signin" })}
+                onClick={() => signOut({ callbackUrl: "/auth/signin" })}
                 className="block text-left py-2 px-4 text-sm w-full font-medium hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 Sign out{" "}
