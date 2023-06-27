@@ -58,6 +58,7 @@ const CreateSettlement = ({
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error.response.data.message || "An error occured");
       })
       .finally(() => setFormLoadingState(false));
   };

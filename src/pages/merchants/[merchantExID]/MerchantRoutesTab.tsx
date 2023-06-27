@@ -188,6 +188,7 @@ const MerchantRoutesTab = ({
             ))}
 
           {!merchantRoutes && !isLoading && <TableNoDataFound />}
+          {merchantRoutes?.length === 0 && !isLoading && <TableNoDataFound />}
           {isLoading && <TableLoader showBackground={false} />}
         </div>
 

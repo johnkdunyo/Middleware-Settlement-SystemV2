@@ -5,9 +5,9 @@ import { error } from "console";
 import { INewRoute, INewRouteErrorObject, IServerRoute } from "@/types/route";
 import InputComponent from "@/components/uis/InputComponent";
 
-import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { IMerchantDetails, INewMerchant } from "@/types/merchant";
+import { useRouter } from "next/router";
 
 const AddMerchantRoute = ({
   setOpenAddMerchantRouteModal,
@@ -18,7 +18,8 @@ const AddMerchantRoute = ({
     React.SetStateAction<IMerchantDetails | undefined>
   >;
 }) => {
-  const params = useParams();
+  const router = useRouter();
+  const merchantExID = router.query.merchantExID;
   const [isLoadingState, setIsLoadingState] = useState(false);
   const [formLoadingState, setFormLoadingState] = useState(false);
   const [allRoutes, setAllRoutes] = useState<IServerRoute[]>([]);
@@ -74,13 +75,13 @@ const AddMerchantRoute = ({
     setErrorObject(undefined);
     setFormLoadingState(true);
     console.log(newMerchantRoute);
-    API.post(`/merchants/${params.merchantExID}/routes`, newMerchantRoute)
+    API.post(`/merchants/${merchantExID}/routes`, newMerchantRoute)
       .then((response) => {
         if (response.data.success) {
           toast.success(response.data.message);
           setOpenAddMerchantRouteModal(false);
           // update state
-          API.get(`/merchants/${params.merchantExID}`).then((response) => {
+          API.get(`/merchants/${merchantExID}`).then((response) => {
             setMerchantDetails(response.data.data);
           });
         }

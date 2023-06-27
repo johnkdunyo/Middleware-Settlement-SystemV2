@@ -1,20 +1,21 @@
-"use client";
-
-import AuthLayout from "@/layouts/AuthLayout";
 import React, { SetStateAction, useState, useEffect } from "react";
 import SettlementStatusHeader from "./SettlementStatusHeader";
 
-import RoutesTab from "../../../components/settlementPage/RoutesTab";
 import API from "@/network/api";
-import SettlementSummary from "../../../components/settlementPage/SettlementSummary";
-import MerchantsTab from "../../../components/settlementPage/MerchantsTab";
-import { useParams, useRouter } from "next/navigation";
+
 import { ISettlementDetails } from "@/types/settlement";
 import { IPageMeta } from "@/types/pageMeta";
 import Modal from "@/components/modals";
 import { toast } from "react-toastify";
 import { ITabs } from "@/types/tab";
-import SettlementTabButton from "@/components/settlementPage/SettlementTabButton";
+
+import { useRouter } from "next/router";
+import AuthLayout from "@/layout/AuthLayout";
+import { getSession } from "next-auth/react";
+import SettlementSummary from "@/components/settlements/SettlementSummary";
+import SettlementTabButton from "@/components/settlements/SettlementTabButton";
+import RoutesTab from "@/components/settlements/RoutesTab";
+import MerchantsTab from "@/components/settlements/MerchantsTab";
 
 type Params = {
   params: {
@@ -35,8 +36,9 @@ const settlementTabs: ITabs[] = [
 
 export default function SettlementDetailsPage() {
   const router = useRouter();
-  const navParams = useParams();
-  console.log("params", navParams);
+  const settlementID = Array.isArray(router.query.merchantExID)
+    ? router.query.merchantExID[0]
+    : router.query.merchantExID;
   const [isLoading, setIsLoading] = useState(false);
   const [openSettleModal, setOpenSettleModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -49,7 +51,7 @@ export default function SettlementDetailsPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    API.get(`/settlements/${navParams.settlementID || navParams.settlementId}`)
+    API.get(`/settlements/${settlementID}`)
       .then((response) => {
         // console.log(response.data);
         setPageMeta(response.data.meta);
@@ -62,17 +64,12 @@ export default function SettlementDetailsPage() {
   }, []);
 
   const onSettleHandler = () => {
-    API.put(
-      `/settlements/${navParams.settlementID || navParams.settlementId}`,
-      { status: "settled" }
-    )
+    API.put(`/settlements/${settlementID}`, { status: "settled" })
       .then((response) => {
         console.log(response);
         toast.success("Settled successfully");
         setOpenSettleModal(false);
-        API.get(
-          `/settlements/${navParams.settlementID || navParams.settlementId}`
-        )
+        API.get(`/settlements/${settlementID}`)
           .then((response) => {
             // console.log(response.data);
             setPageMeta(response.data.meta);
@@ -89,9 +86,7 @@ export default function SettlementDetailsPage() {
   };
 
   const onDeleteHandler = () => {
-    API.delete(
-      `/settlements/${navParams.settlementID || navParams.settlementId}`
-    )
+    API.delete(`/settlements/${settlementID}`)
       .then((response) => {
         console.log(response);
         toast.success("Roll back successfully");
@@ -224,4 +219,21 @@ export default function SettlementDetailsPage() {
       </Modal>
     </AuthLayout>
   );
+}
+
+export async function getServerSideProps({ req }: any) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 }

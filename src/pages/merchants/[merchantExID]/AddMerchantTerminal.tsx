@@ -1,9 +1,9 @@
 import InputComponent from "@/components/uis/InputComponent";
 import { IMerchantDetails, INewMerchant } from "@/types/merchant";
-import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import API from "@/network/api";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface AddMerchantTerminalProps {
   setOpenAddMerchantTerminalModal: React.Dispatch<
@@ -18,10 +18,13 @@ const AddMerchantTerminal = ({
   setOpenAddMerchantTerminalModal,
   setMerchantDetails,
 }: AddMerchantTerminalProps) => {
-  const params = useParams();
+  const router = useRouter();
+  const merchantExID = Array.isArray(router.query.merchantExID)
+    ? router.query.merchantExID[0]
+    : router.query.merchantExID;
   const [formLoadingState, setFormLoadingState] = useState(false);
   const [newMerchant, setNewMerchant] = useState<INewMerchant>({
-    merchantExternalId: params.merchantExID,
+    merchantExternalId: merchantExID || "",
     name: "",
     bankName: "",
     bankAccountName: "",
@@ -59,7 +62,7 @@ const AddMerchantTerminal = ({
           toast.success(response.data.message);
           setOpenAddMerchantTerminalModal(false);
           // update state
-          API.get(`/merchants/${params.merchantExID}`).then((response) => {
+          API.get(`/merchants/${merchantExID}`).then((response) => {
             setMerchantDetails(response.data.data);
           });
         }

@@ -1,9 +1,9 @@
 import InputComponent from "@/components/uis/InputComponent";
-import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import API from "@/network/api";
 import { toast } from "react-toastify";
 import { IMerchantDetails } from "@/types/merchant";
+import { useRouter } from "next/router";
 
 interface IErrorObject {
   name: string;
@@ -34,7 +34,8 @@ const UpdateMerchant = ({
   setMerchantDetails,
   setOpenEditMerchantModal,
 }: IUpdateMerchantProps) => {
-  const params = useParams();
+  const router = useRouter();
+  const merchantExID = router.query.merchantExID;
   const [merchantData, setMerchantData] = useState({
     name: name,
     bankName: bankName,
@@ -57,11 +58,11 @@ const UpdateMerchant = ({
   const onUpdateMerchantHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormLoadingState(true);
-    API.put(`/merchants/${params.merchantExID}`, merchantData)
+    API.put(`/merchants/${merchantExID}`, merchantData)
       .then((response) => {
         toast.success("Merchant Updated Successfully");
         setOpenEditMerchantModal(false);
-        API.get(`/merchants/${params.merchantExID}`).then((response) => {
+        API.get(`/merchants/${merchantExID}`).then((response) => {
           setMerchantDetails(response.data.data);
         });
       })

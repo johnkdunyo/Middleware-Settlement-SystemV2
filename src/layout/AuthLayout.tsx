@@ -13,7 +13,7 @@ const AuthLayout = (props: { [x: string]: any; children: any }) => {
   const token = session?.user.bearerToken;
 
   if (token) {
-    console.log(token);
+    // console.log(token);
     API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
 

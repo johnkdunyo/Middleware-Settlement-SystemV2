@@ -1,11 +1,11 @@
 import InputComponent from "@/components/uis/InputComponent";
 import { IMerchant, IMerchantDetails } from "@/types/merchant";
 import { ITerminal } from "@/types/terminal";
-import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import API from "@/network/api";
 import { error } from "console";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface UpdateMerchantTerminalProps {
   terminal: ITerminal;
@@ -18,10 +18,12 @@ interface UpdateMerchantTerminalProps {
 }
 
 const UpdateMerchantTerminal = ({ terminal }: UpdateMerchantTerminalProps) => {
-  const params = useParams();
+  const router = useRouter();
+  const merchantExID = router.query.merchantExID;
+  if (!merchantExID) return;
   const [formLoadingState, setFormLoadingState] = useState(false);
   const [newMerchant, setNewMerchant] = useState<ITerminal>({
-    externalId: params.merchantExID,
+    externalId: terminal.externalId,
     name: terminal.name,
     bankName: terminal.bankName,
     bankAccountName: terminal.bankAccountName,

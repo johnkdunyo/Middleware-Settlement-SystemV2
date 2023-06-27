@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 
 const SettlementByMerchantStatusHeader = () => {
-  const params = useParams();
+  const router = useRouter();
 
   return (
     <section className="w-full flex  justify-between border-b py-1 items-end">
@@ -13,14 +13,16 @@ const SettlementByMerchantStatusHeader = () => {
             SettlementID:
           </Link>{" "}
           <span className="font-medium text-gray-600">
-            {params.settlementId}
+            {router.query.settlementID}
           </span>
         </h1>
         <h1>
           <Link href="/settlements/60606" className="hover:underline">
             Merchant:
           </Link>{" "}
-          <span className="font-medium text-gray-600">{params.merchantID}</span>
+          <span className="font-medium text-gray-600">
+            {router.query.merchantID}
+          </span>
         </h1>
       </div>
       <div>

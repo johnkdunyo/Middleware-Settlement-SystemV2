@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
+
 import React from "react";
 
 const SettlementStatusHeader = ({ status = "pending" }: { status: string }) => {
-  const params = useParams();
+  const router = useRouter();
 
   return (
     <section className="w-full flex  justify-between border-b py-1 items-end">
@@ -13,7 +14,7 @@ const SettlementStatusHeader = ({ status = "pending" }: { status: string }) => {
             SettlementID:
           </Link>{" "}
           <span className="font-medium text-gray-600">
-            {params.settlementID}
+            {router.query.settlementID}
           </span>
         </h1>
       </div>

@@ -2,9 +2,10 @@ import InputComponent from "@/components/uis/InputComponent";
 import { INewRouteErrorObject, IRoute } from "@/types/route";
 import React, { useState } from "react";
 import API from "@/network/api";
-import { useParams } from "next/navigation";
+
 import { toast } from "react-toastify";
 import { IMerchantDetails } from "@/types/merchant";
+import { useRouter } from "next/router";
 
 interface INewMerchantRoute {
   percentageFee: number;
@@ -27,7 +28,8 @@ const UpdateMerchantRoute = ({
   route,
   setMerchantDetails,
 }: UpdateMerchantRouteProps) => {
-  const params = useParams();
+  const router = useRouter();
+  const merchantExID = router.query.merchantExID;
   const [formLoadingState, setFormLoadingState] = useState(false);
   const [newMerchantRoute, setNewMerchantRoute] = useState<INewMerchantRoute>({
     percentageFee: route.percentageFee,
@@ -64,13 +66,13 @@ const UpdateMerchantRoute = ({
     setErrorObject(undefined);
     setFormLoadingState(true);
     API.put(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/merchants/${params.merchantExID}/routes/${route.externalId}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/merchants/${merchantExID}/routes/${route.externalId}`,
       newMerchantRoute
     )
       .then((_response) => {
         toast.success("Merchant Route Updated");
         // update state
-        API.get(`/merchants/${params.merchantExID}`).then((response) => {
+        API.get(`/merchants/${merchantExID}`).then((response) => {
           setMerchantDetails(response.data.data);
           console.log(response.data.data);
         });

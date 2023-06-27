@@ -1,12 +1,11 @@
-"use client";
-
 import TableFooter from "@/components/tables/TableFooter";
 import { ITransaction } from "@/types/transactions";
 import React, { useEffect, useState } from "react";
 import API from "@/network/api";
-import { useParams } from "next/navigation";
+
 import { error } from "console";
 import { IPageMeta } from "@/types/pageMeta";
+import { useRouter } from "next/router";
 
 const tableHeaders = [
   "stan",
@@ -45,7 +44,7 @@ const SingleTableRow = ({ transaction }: { transaction: ITransaction }) => {
 };
 
 const TransactionsTab = () => {
-  const params = useParams();
+  const router = useRouter();
   const [openFilters, setOpenFilters] = useState(true);
   const [transactins, setTransactions] = useState<ITransaction[]>();
   const [pageMeta, setPageMeta] = useState<IPageMeta>();
@@ -53,7 +52,7 @@ const TransactionsTab = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    API.get(`/settlements/${params.settlementId}/transactions`)
+    API.get(`/settlements/${router.query.settlementID}/transactions`)
       .then((response) => {
         // console.log(response.data);
         setTransactions(response.data.data);
