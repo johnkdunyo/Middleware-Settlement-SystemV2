@@ -3,9 +3,10 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const UserButton = () => {
+  const { data: session } = useSession();
   const [openDropdown, setOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownRef2 = useRef<HTMLButtonElement>(null);
@@ -50,10 +51,10 @@ const UserButton = () => {
         >
           <div className="py-3 px-4">
             <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-              Jon Doe
+              {session?.user.firstName}
             </span>
             <span className="block text-sm text-gray-900 truncate dark:text-white">
-              jon@doe.com
+              {session?.user.email}
             </span>
           </div>
           <ul

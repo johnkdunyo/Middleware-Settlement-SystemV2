@@ -81,15 +81,16 @@ const RouteDetailsCard = ({
   setOpenUpdateRouteModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <div className=" h-full w-full flex flex-col justify-between  bg-white border border-gray-200 rounded-lg text-black">
-      <div className=" border-b px-3 pt-2  flex justify-between">
+    <div className="py-2 h-full w-full flex flex-col justify-between  bg-white border border-gray-200 rounded-lg text-black ">
+      <div className=" border-b px-3 pt-2  flex justify-between h-12">
         <h1 className="text-blue-900 font-medium">Route Details</h1>
         <button onClick={() => setSelectedRoute(undefined)}>
           <XMarkIcon className="h-6 w-6 text-gray-500 hover:bg-gray-200 rounded-lg m-1.5" />
         </button>
       </div>
-      <div className="flex flex-col justify-between h-full  ">
-        <div className="px-4">
+
+      <div className="flex flex-col justify-between h-[45vh] 2xl:h-[50vh] overflow-scroll ">
+        <div className="px-4 overflow-scroll">
           <table className="table-auto w-full text-base mt-6 ">
             <thead></thead>
             <tbody>
@@ -150,18 +151,17 @@ const RouteDetailsCard = ({
             </tbody>
           </table>
         </div>
-
-        <div className=" border-t  w-full  flex justify-between px-3 py-2 text-sm  text-white">
-          <button
-            className="px-3 py-1.5 rounded-lg  bg-green-500 hover:bg-green-600"
-            onClick={() => setOpenUpdateRouteModal(true)}
-          >
-            Update Route
-          </button>
-          <button className="px-3 py-1.5 rounded-lg  bg-red-700 hover:bg-red-800">
-            Delete Route
-          </button>
-        </div>
+      </div>
+      <div className=" border-t  w-full  flex justify-between px-3 py-2 text-sm  text-white">
+        <button
+          className="px-3 py-1.5 rounded-lg  bg-green-500 hover:bg-green-600"
+          onClick={() => setOpenUpdateRouteModal(true)}
+        >
+          Update Route
+        </button>
+        <button className="px-3 py-1.5 rounded-lg  bg-red-700 hover:bg-red-800">
+          Delete Route
+        </button>
       </div>
     </div>
   );
@@ -191,8 +191,8 @@ const Page = () => {
 
   return (
     <AuthLayout>
-      <div className=" md:ml-52 h-[89vh] 2xl:h-[90vh] mt-20 overflow-clip  flex flex-col justify-between gap-4">
-        <div className="w-full  border-b pb-2  flex justify-end  px-3 pt-2.5">
+      <div className=" md:ml-52 h-[89vh] xl:h-[85vh] 2xl:h-[89vh] mt-20 overflow-clip  flex flex-col justify-between gap-4  border-red-700">
+        <div className="w-full h-12  border-b pb-2  flex justify-end  px-3 pt-2.5">
           <div className="">
             <button
               onClick={() => setOpenAddRouteModal(true)}
@@ -216,7 +216,7 @@ const Page = () => {
             </button>
           </div>
         </div>
-        <div className="w-full h-[80vh] grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="w-full h-[75vh] xl:h-[73vh] 2xl:h-[79vh]  border-green-500 grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div
             className={` ${
               selectedRoute ? "w-auto" : "col-span-2"

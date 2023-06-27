@@ -20,7 +20,7 @@ const DataCardComponent2 = ({
   isCurrency = false,
 }: IDataCardComponent2) => {
   return (
-    <div className="flex flex-col justify-start px-4 py-3 border w-full gap-1 bg-white border-gray-400 rounded-md">
+    <div className="flex flex-col justify-start px-4 py-2.5 border w-full gap-1 bg-white border-gray-400 rounded-md">
       <p className="text-sm tracking-tight font-medium text-[#0F172A]">
         {title}
       </p>
@@ -36,7 +36,7 @@ const SettlementSummary = ({
   isLoading,
 }: SettlementSummaryProps) => {
   return (
-    <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 w-full gap-6">
+    <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
       <DataCardComponent2
         title="Transaction Value"
         value={settlementSummary?.transactionValue || 0}
@@ -60,7 +60,7 @@ const SettlementSummary = ({
       />
 
       <DataCardComponent2
-        title="Amout Payable"
+        title="Amount Payable"
         value={settlementSummary?.amountPayable || 0}
         isCurrency={true}
       />

@@ -85,9 +85,9 @@ const Page = () => {
 
   return (
     <AuthLayout>
-      <div className=" md:ml-52 h-[89vh] mt-20 overflow-clip  flex flex-col gap-4 justify-between">
+      <div className=" md:ml-52 h-[80vh] xl:h-[86vh] 2xl:h-[89vh] mt-20 overflow-clip  flex flex-col gap-4 justify-between  border-black">
         <div className="w-full flex flex-col justify-between border-b">
-          <div className="flex gap-2 items-center mt-3">
+          <div className="flex gap-2 items-center mt-0">
             <h1 className="font-medium text-xl text-black hover:underline">
               <Link href="/merchants">Merchants</Link>
             </h1>
@@ -129,7 +129,7 @@ const Page = () => {
               />
             ))}
           </ul>
-          <div className="w-full bg-white h-full flex flex-col border ">
+          <div className="w-full bg-white h-full flex flex-col  border-red-600">
             {currentTab.id === 1 && (
               <MerchantRoutesTab
                 merchantRoutes={merchantDetails?.routes!}

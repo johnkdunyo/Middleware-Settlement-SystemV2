@@ -90,7 +90,9 @@ export default function Home() {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("An error occured");
+        toast.error(
+          error.response.data.message || "Error fetching all merchants"
+        );
       })
       .finally(() => setIsLoading(false));
   }, [url]);
@@ -125,11 +127,11 @@ export default function Home() {
   return (
     <AuthLayout>
       <div
-        className={` md:ml-52  h-[89vh] mt-20 overflow-scroll  flex flex-col gap-6 `}
+        className={` md:ml-52 xl:h-[86vh]  2xl:h-[89vh]  h-[89vh] mt-20   border-black  flex flex-col justify-between gap-4 2xl:gap-6`}
       >
-        <div className="border-b">
+        <div className="border-b h-12">
           <form
-            className="flex items-center py-3 px-0 pb-1.5 w-full gap-4"
+            className="flex items-center py-0 px-0 pb-1.5 w-full gap-4  border-red-500"
             onSubmit={onFormSubmitHandler}
           >
             <div className="w-1/3">
@@ -170,16 +172,16 @@ export default function Home() {
             </div>
           </form>
         </div>
-        <div>
-          <p className=" -mt-4 border-b">{summaryText}</p>
+        <div className="h-10">
+          <p className=" -mt-5 border-b">{summaryText}</p>
         </div>
-        <div className="w-full  h-full flex flex-col">
+        <div className="w-full h-full flex flex-col  border-yellow-400">
           <SettlementSummary
             settlementSummary={settlementDetails?.summary!}
             isLoading={isLoading}
           />
 
-          <section className="w-full h-full  justify-between flex flex-col mt-5">
+          <section className="w-full h-full justify-between flex flex-col mt-5">
             <div className="flex justify-between items-center">
               <ul className="flex flex-wrap text-sm font-medium text-center  border-gray-200">
                 {settlementTabs.map((tab) => (
@@ -193,7 +195,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="w-full bg-white h-full flex flex-col  border ">
+            <div className="w-full bg-white  flex flex-col  border ">
               {currentTab.title === "Routes" && (
                 <RoutesTab
                   isLoading={isLoading}

@@ -31,7 +31,7 @@ const Page = () => {
 
   return (
     <AuthLayout>
-      <div className=" md:ml-52 h-[89vh] 2xl:h-[90vh] mt-20 overflow-scroll  flex flex-col gap-4">
+      <div className=" md:ml-52 h-[86vh] 2xl:h-[90vh] mt-20 overflow-scroll  flex flex-col gap-4  border-black">
         <AddMerchant setMerchantsData={setMerchantsData} />
         <MerchantsTable
           isLoadingData={isLoadingData}

@@ -4,7 +4,7 @@ interface ITableLoaderProps {
   showBackground?: boolean;
 }
 
-const TableLoader = ({ showBackground = true }: ITableLoaderProps) => {
+const TableLoader = ({ showBackground = false }: ITableLoaderProps) => {
   return (
     <div
       className={`h-full w-full border-red-500 flex flex-col items-center justify-center ${

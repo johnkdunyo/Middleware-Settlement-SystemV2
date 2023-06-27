@@ -76,7 +76,7 @@ const MerchantsTab = ({
 
   return (
     // 2xl: bsl mac upwords
-    <div className=" w-full h-[42vh] 2xl:h-[49.5vh]   flex flex-col justify-between">
+    <div className=" w-full h-[42vh] xl:h-[40vh] 2xl:h-[49.5vh]   xl:border-red-700  2xl:border-blue-700 flex flex-col justify-between">
       {openFilters && (
         <div className="w-full border-b  ">
           <form className="flex items-center p-3 pb-1.5 w-full gap-4">
@@ -126,7 +126,7 @@ const MerchantsTab = ({
         </div>
       )}
 
-      <div className=" tableWrapper">
+      <div className=" tableWrapper  border-green-600 ">
         <div className="overflow-auto ">
           <table className="w-full text-sm text-left   table-auto">
             <thead className="sticky top-0 text-xs text-gray-700 uppercase  border-b border-black bg-white ">

@@ -64,6 +64,8 @@ const authOptions: NextAuthOptions = {
      
       if (user) {
         token.email = user.email;
+        token.firstName = user.firstName
+        token.lastName = user.lastName
         token.bearerToken = user.bearerToken;
       }
 
@@ -72,6 +74,8 @@ const authOptions: NextAuthOptions = {
     session: ({ session, token }) => {
       if (session.user) {
         session.user.email = token.email;
+        session.user.firstName = token.firstName
+        session.user.lastName = token.lastName
         session.user.bearerToken = token.bearerToken;
       }
 

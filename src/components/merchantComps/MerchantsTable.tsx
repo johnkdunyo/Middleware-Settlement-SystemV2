@@ -53,7 +53,7 @@ const MerchantsTable = ({
   const [openFilters, setOpenFilters] = useState(true);
 
   return (
-    <section className=" bg-white  rounded-lg border h-full flex flex-col gap-3 overflow-clip">
+    <section className=" bg-white   border-gray-500 rounded-lg border h-full flex flex-col gap-3 overflow-clip">
       {openFilters && (
         <div className="w-full border-b  ">
           <form className="flex items-center p-3 pb-1.5 w-full gap-4">

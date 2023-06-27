@@ -50,9 +50,9 @@ const RoutesTab = ({ isLoading, settlementRoutes }: RoutesTabProps) => {
   const [openFilters, setOpenFilters] = useState(false);
 
   // console.log(settlementRoutes, "kk");
-
+  // h-[42vh] 2xl:h-[49.5vh]
   return (
-    <div className=" w-full h-[42vh] 2xl:h-[49.5vh]  flex flex-col justify-between">
+    <div className=" w-full h-[42vh] xl:h-[40vh] 2xl:h-[49.5vh] flex flex-col justify-between">
       {openFilters && (
         <div className="w-full border-b  ">
           <form className="flex items-center p-3 pb-1.5 w-full gap-4">

@@ -62,8 +62,8 @@ const MerchantSummary = ({
   return (
     <section className="flex  justify-between w-full h-[17vh]  ">
       <div className="w-full flex justify-between   gap-10">
-        <div className="  w-8/12 flex  bg-white border border-gray-500 rounded-lg p-2 text-sm items-end relative">
-          <table className="w-[45%] table-auto">
+        <div className="  w-8/12 flex  bg-white border border-gray-500 rounded-lg p-2 text-sm items-end  gap-6 relative">
+          <table className="w-[40%] table-auto">
             <thead></thead>
             <tbody className=" ">
               <tr className="">
@@ -80,25 +80,27 @@ const MerchantSummary = ({
             </tbody>
           </table>
 
-          <table className=" w-full table-auto">
+          <table className=" w-[55%] table-auto overflow-auto ">
             <thead></thead>
             <tbody>
               <tr className="whitespace-nowrap">
-                <td className="whitespace-pre overflow-scroll">Bank Name</td>
+                <td className=" overflow-scroll">Bank Name</td>
                 <td className="text-[#2e4792]  whitespace-pre overflow-scroll">
                   {bankName}
                 </td>
               </tr>
               <tr className="">
-                <td>Bank Account Name</td>
-                <td className="text-[#2e4792] ">{bankAccountName}</td>
+                <td>Account Name</td>
+                <td className="text-[#2e4792] whitespace-wrap">
+                  {bankAccountName}
+                </td>
               </tr>
               <tr className="">
-                <td>Bank Account Number</td>
+                <td className="">Account Number</td>
                 <td className="text-[#2e4792] ">{bankAccountNumber}</td>
               </tr>
               <tr className="">
-                <td>Bank Branch Code</td>
+                <td>Branch Code</td>
                 <td className="text-[#2e4792] ">{bankBranchCode}</td>
               </tr>
             </tbody>

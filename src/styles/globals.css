@@ -12,5 +12,10 @@ body {
 /* tables */
 
 .tableWrapper {
-  @apply w-full p-3 flex flex-col justify-between overflow-scroll h-full
+  @apply w-full p-2 flex flex-col justify-between overflow-scroll h-full
+}
+
+
+::-webkit-scrollbar {
+  display: none;
 }

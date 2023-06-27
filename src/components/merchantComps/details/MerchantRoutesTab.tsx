@@ -69,12 +69,12 @@ const RouteDetails = ({
   setOpenEditMerchantModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <div className="w-3/5  h-full flex flex-col justify-between  bg-[#f3f4f6] border border-gray-200 rounded-lg text-black">
-      <div className=" border-b px-3 pt-2 ">
+    <div className="w-3/5  h-full flex flex-col justify-between  bg-[#f3f4f6] border border-gray-200 rounded-lg text-black ">
+      <div className=" border-b px-3 pt-2 h-10">
         <h1 className="text-blue-900 font-medium">Route Details</h1>
       </div>
 
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-between h-full overflow-scroll">
         <div className=" px-3   mt-6">
           <table className="table-auto w-full text-base  ">
             <thead></thead>
@@ -109,18 +109,17 @@ const RouteDetails = ({
             </tbody>
           </table>
         </div>
-
-        <div className=" border-t w-full  flex justify-between px-3 py-3 text-sm  text-white">
-          <button
-            className="px-3 py-1.5 rounded-lg  bg-green-500 hover:bg-green-600"
-            onClick={() => setOpenEditMerchantModal(true)}
-          >
-            Update Route
-          </button>
-          <button className="px-3 py-1.5 rounded-lg  bg-red-700 hover:bg-red-800">
-            Delete Route
-          </button>
-        </div>
+      </div>
+      <div className=" border-t w-full  flex justify-between px-3 py-3 text-sm  text-white">
+        <button
+          className="px-3 py-1.5 rounded-lg  bg-green-500 hover:bg-green-600"
+          onClick={() => setOpenEditMerchantModal(true)}
+        >
+          Update Route
+        </button>
+        <button className="px-3 py-1.5 rounded-lg  bg-red-700 hover:bg-red-800">
+          Delete Route
+        </button>
       </div>
     </div>
   );
@@ -149,14 +148,14 @@ const MerchantRoutesTab = ({
   const [openEditMerchantModal, setOpenEditMerchantModal] = useState(false);
 
   return (
-    <div className="h-full  w-full flex flex-col overflow-clip gap-6">
+    <div className="h-full  w-full flex flex-col overflow-clip gap-4">
       {/* top row */}
       <div className="w-full  border-b pb-2  flex justify-end  px-3 pt-2.5">
         <div className="">
           <button
             onClick={() => setOpenAddMerchantRouteModal(true)}
             type="button"
-            className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800  font-medium rounded-lg text-sm px-3 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 "
+            className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800  font-medium rounded-lg text-sm px-3 py-2 2xl:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 "
           >
             <svg
               className="h-3.5 w-3.5 mr-2"
@@ -175,7 +174,7 @@ const MerchantRoutesTab = ({
           </button>
         </div>
       </div>
-      <div className="w-full flex h-[48vh] 2xl:h-[52vh] justify-between gap-10 px-3">
+      <div className="w-full flex h-[48vh] xl:h-[40vh] 2xl:h-[52vh] justify-between gap-10 px-3  border-blue-600">
         <div className="   h-full flex flex-col gap-5   w-2/5 overflow-scroll">
           {merchantRoutes &&
             merchantRoutes.map((route, _x) => (
