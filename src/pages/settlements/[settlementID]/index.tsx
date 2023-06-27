@@ -35,7 +35,7 @@ export default function SettlementDetailsPage() {
   const [openSettleModal, setOpenSettleModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  console.log("here", router.query.settlementID);
+  // console.log("here", router.query.settlementID);
 
   const [settlementDetails, setSettlementDetails] =
     useState<ISettlementDetails>();

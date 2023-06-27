@@ -49,6 +49,8 @@ const SingleTableRow = ({ route }: { route: ISettlementRoutes }) => {
 const RoutesTab = ({ isLoading, settlementRoutes }: RoutesTabProps) => {
   const [openFilters, setOpenFilters] = useState(false);
 
+  // console.log(settlementRoutes, "kk");
+
   return (
     <div className=" w-full h-[42vh] 2xl:h-[49.5vh]  flex flex-col justify-between">
       {openFilters && (
@@ -125,7 +127,9 @@ const RoutesTab = ({ isLoading, settlementRoutes }: RoutesTabProps) => {
         </div>
 
         {isLoading && <TableLoader showBackground={false} />}
-        {settlementRoutes && !isLoading && <TableNoDataFound title="Route" />}
+        {settlementRoutes && settlementRoutes.length === 0 && !isLoading && (
+          <TableNoDataFound title="Route" />
+        )}
 
         <TableFooter />
       </div>

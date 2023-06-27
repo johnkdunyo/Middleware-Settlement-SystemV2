@@ -151,9 +151,9 @@ const MerchantsTab = ({
         </div>
 
         {isLoading && <TableLoader showBackground={false} />}
-        {settlementMerchants && !isLoading && (
-          <TableNoDataFound title="Merchant" />
-        )}
+        {settlementMerchants &&
+          settlementMerchants.length === 0 &&
+          !isLoading && <TableNoDataFound title="Merchant" />}
 
         <TableFooter />
       </div>
