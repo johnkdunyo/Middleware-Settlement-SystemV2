@@ -17,12 +17,6 @@ import SettlementTabButton from "@/components/settlements/SettlementTabButton";
 import RoutesTab from "@/components/settlements/RoutesTab";
 import MerchantsTab from "@/components/settlements/MerchantsTab";
 
-type Params = {
-  params: {
-    settlementID: number;
-  };
-};
-
 const settlementTabs: ITabs[] = [
   {
     id: 1,
@@ -36,12 +30,12 @@ const settlementTabs: ITabs[] = [
 
 export default function SettlementDetailsPage() {
   const router = useRouter();
-  const settlementID = Array.isArray(router.query.merchantExID)
-    ? router.query.merchantExID[0]
-    : router.query.merchantExID;
+  const settlementID = router.query.settlementID;
   const [isLoading, setIsLoading] = useState(false);
   const [openSettleModal, setOpenSettleModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  console.log("here", router.query.settlementID);
 
   const [settlementDetails, setSettlementDetails] =
     useState<ISettlementDetails>();
