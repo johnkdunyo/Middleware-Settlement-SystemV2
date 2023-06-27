@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  background-color: #f3f4f6;
+}
+
+
+
+/* tables */
+
+.tableWrapper {
+  @apply w-full p-3 flex flex-col justify-between overflow-scroll h-full
+}
