@@ -64,8 +64,11 @@ export default function Home() {
       urll += `&to=${dateValue.endDate}`;
     }
 
-    if (selectedMerchant?.externalId) {
+    if (selectedMerchant?.externalId && dateValue.startDate) {
       urll += `&merchant=${selectedMerchant.externalId}`;
+    }
+    if (selectedMerchant?.externalId && !dateValue.startDate) {
+      urll += `?merchant=${selectedMerchant.externalId}`;
     }
     setUrl(urll);
   };

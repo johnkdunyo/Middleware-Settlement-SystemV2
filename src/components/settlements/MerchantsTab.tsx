@@ -10,7 +10,7 @@ import React, { useState } from "react";
 
 interface MerchantsTabProps {
   isLoading: boolean;
-  settlementMerchants: ISettlementMerchants[];
+  settlementMerchants: ISettlementMerchants[] | ISettlementMerchants;
   showSettledAtDate?: boolean;
 }
 
@@ -18,34 +18,34 @@ const SingleTableRow = ({ merchant }: { merchant: ISettlementMerchants }) => {
   return (
     <tr className="border-b -z-10  group hover:bg-gray-100 whitespace-nowrap cursor-pointer text-gray-600 ">
       <th scope="row" className="px-4 py-2 font-medium  whitespace-nowrap  ">
-        {merchant.name}
+        {merchant?.name}
       </th>
-      <td className="px-4 py-2">{merchant.transactionCount}</td>
+      <td className="px-4 py-2">{merchant?.transactionCount}</td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.transactionValue) || 0)}
+        {formatCurrency(Number(merchant?.transactionValue) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.grossCommission) || 0)}
+        {formatCurrency(Number(merchant?.grossCommission) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.processorCommission) || 0)}
+        {formatCurrency(Number(merchant?.processorCommission) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.netCommission) || 0)}
+        {formatCurrency(Number(merchant?.netCommission) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.amountPayable) || 0)}
+        {formatCurrency(Number(merchant?.amountPayable) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.mtnCost) || 0)}
+        {formatCurrency(Number(merchant?.mtnCost) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.vodafoneCashCost) || 0)}
+        {formatCurrency(Number(merchant?.vodafoneCashCost) || 0)}
       </td>
       <td className="px-4 py-2">
-        {formatCurrency(Number(merchant.atmoneyCost) || 0)}
+        {formatCurrency(Number(merchant?.atmoneyCost) || 0)}
       </td>
-      {merchant.settledAt && (
+      {merchant?.settledAt && (
         <td className="px-4 py-2">{formatDate(merchant?.settledAt!)}</td>
       )}
     </tr>
@@ -73,6 +73,8 @@ const MerchantsTab = ({
   ];
 
   showSettledAtDate && tableHeaders.push("Settled At");
+
+  console.log(Array.isArray(settlementMerchants));
 
   return (
     // 2xl: bsl mac upwords
@@ -143,15 +145,23 @@ const MerchantsTab = ({
             </thead>
             <tbody className="">
               {settlementMerchants &&
+                Array.isArray(settlementMerchants) &&
                 settlementMerchants.map((merchant, _x) => (
                   <SingleTableRow key={_x} merchant={merchant} />
                 ))}
+
+              {!Array.isArray(settlementMerchants) && (
+                <SingleTableRow
+                  merchant={settlementMerchants as ISettlementMerchants}
+                />
+              )}
             </tbody>
           </table>
         </div>
 
         {isLoading && <TableLoader showBackground={false} />}
         {settlementMerchants &&
+          Array.isArray(settlementMerchants) &&
           settlementMerchants.length === 0 &&
           !isLoading && <TableNoDataFound title="Merchant" />}
 
