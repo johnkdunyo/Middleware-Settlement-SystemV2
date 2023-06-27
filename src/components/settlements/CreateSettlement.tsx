@@ -168,17 +168,17 @@ const CreateSettlement = ({
                 >
                   {formLoadingState ? "Submiting" : "Submit"}
                 </button>
+              ) : uploadedSettlementData ? (
+                <button
+                  className={`flex items-center justify-center text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-6 py-2 dark:bg-green-600 dark:hover:bg-green-700  ${
+                    !uploadedSettlementData && "cursor-not-allowed"
+                  }`}
+                  onClick={onDoneCloseModal}
+                >
+                  Done
+                </button>
               ) : (
-                uploadedSettlementData && (
-                  <button
-                    className={`flex items-center justify-center text-white bg-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-6 py-2 dark:bg-green-600 dark:hover:bg-green-700  ${
-                      !uploadedSettlementData && "cursor-not-allowed"
-                    }`}
-                    onClick={onDoneCloseModal}
-                  >
-                    Done
-                  </button>
-                )
+                <p className="text-center">Please wait...</p>
               )}
             </div>
           </form>

@@ -260,6 +260,7 @@ const Page = () => {
         <UpdateRoute
           setOpenUpdateRouteModal={setOpenUpdateRouteModal}
           route={selectedRoute!}
+          setRoutes={setRoutes}
         />
       </Modal>
 
@@ -269,7 +270,10 @@ const Page = () => {
         onClose={() => setOpenAddRouteModal(false)}
         dialogWrapperClass="w-2/5 md:w-[55%] p-6"
       >
-        <AddRoute setOpenAddRouteModal={setOpenAddRouteModal} />
+        <AddRoute
+          setOpenAddRouteModal={setOpenAddRouteModal}
+          setRoutes={setRoutes}
+        />
       </Modal>
     </AuthLayout>
   );

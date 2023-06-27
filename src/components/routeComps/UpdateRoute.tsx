@@ -8,9 +8,14 @@ import { usePathname } from "next/navigation";
 interface UpdateRouteProps {
   route: IServerRoute;
   setOpenUpdateRouteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setRoutes: React.Dispatch<React.SetStateAction<IServerRoute[] | undefined>>;
 }
 
-const UpdateRoute = ({ setOpenUpdateRouteModal, route }: UpdateRouteProps) => {
+const UpdateRoute = ({
+  setOpenUpdateRouteModal,
+  route,
+  setRoutes,
+}: UpdateRouteProps) => {
   const pathName = usePathname();
   const [formLoadingState, setFormLoadingState] = useState(false);
   const [updatedRoute, setUpdatedRoute] = useState({
@@ -34,8 +39,12 @@ const UpdateRoute = ({ setOpenUpdateRouteModal, route }: UpdateRouteProps) => {
     setFormLoadingState(true);
     API.put(`/routes/${route.externalId}`, updatedRoute)
       .then((response) => {
-        toast.success(" Route Updated");
+        toast.success(" Route Updated successfull");
         setOpenUpdateRouteModal(false);
+        API.get(`/routes`).then((response) => {
+          // console.log(response.data.data);
+          setRoutes(response.data.data);
+        });
       })
       .catch((error) => {
         console.log(error.response.data.message);

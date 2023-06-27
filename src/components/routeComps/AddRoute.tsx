@@ -2,12 +2,14 @@ import InputComponent from "@/components/uis/InputComponent";
 import React, { useState } from "react";
 import API from "@/network/api";
 import { toast } from "react-toastify";
+import { IServerRoute } from "@/types/route";
 
 interface AddRouteProps {
   setOpenAddRouteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setRoutes: React.Dispatch<React.SetStateAction<IServerRoute[] | undefined>>;
 }
 
-const AddRoute = ({ setOpenAddRouteModal }: AddRouteProps) => {
+const AddRoute = ({ setOpenAddRouteModal, setRoutes }: AddRouteProps) => {
   const [formLoadingState, setFormLoadingState] = useState(false);
   const [route, setRoute] = useState({
     name: "",
@@ -39,10 +41,16 @@ const AddRoute = ({ setOpenAddRouteModal }: AddRouteProps) => {
       .then((response) => {
         // console.log(response);
         setOpenAddRouteModal(false);
-        toast.success("Merchant Added successfully");
+        toast.success("Route Added successfully");
+        // update state
+        API.get(`/routes`).then((response) => {
+          // console.log(response.data.data);
+          setRoutes(response.data.data);
+        });
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error.response.data.message || "An error occured");
       })
       .finally(() => setFormLoadingState(false));
   };
