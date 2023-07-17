@@ -10,12 +10,6 @@ import MerchantSummary from "@/components/merchantComps/details/MerchantSummary"
 import MerchantRoutesTab from "@/components/merchantComps/details/MerchantRoutesTab";
 import MerchantTerminalsTab from "@/components/merchantComps/details/MerchantTerminalsTab";
 
-// type Params = {
-//   params: {
-//     merchantExID: number;
-//   };
-// };
-
 interface ITabs {
   id: number;
   title: string;

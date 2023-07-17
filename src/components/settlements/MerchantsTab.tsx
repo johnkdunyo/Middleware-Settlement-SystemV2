@@ -74,8 +74,6 @@ const MerchantsTab = ({
 
   showSettledAtDate && tableHeaders.push("Settled At");
 
-  console.log(Array.isArray(settlementMerchants));
-
   return (
     // 2xl: bsl mac upwords
     <div className=" w-full h-[42vh] xl:h-[40vh] 2xl:h-[49.5vh]   xl:border-red-700  2xl:border-blue-700 flex flex-col justify-between">

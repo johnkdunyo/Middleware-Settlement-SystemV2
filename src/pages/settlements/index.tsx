@@ -15,6 +15,7 @@ import SettlementSummary from "@/components/settlements/SettlementSummary";
 import SettlementTabButton from "@/components/settlements/SettlementTabButton";
 import RoutesTab from "@/components/settlements/RoutesTab";
 import MerchantsTab from "@/components/settlements/MerchantsTab";
+import { getSession } from "next-auth/react";
 
 const settlementTabs: ITabs[] = [
   {
@@ -130,7 +131,7 @@ export default function Home() {
   return (
     <AuthLayout>
       <div
-        className={` md:ml-52 xl:h-[86vh]  2xl:h-[89vh]  h-[89vh] mt-20   border-black  flex flex-col justify-between gap-4 2xl:gap-6`}
+        className={` md:ml-52 xl:h-[86vh]  2xl:h-[89vh]  h-[89vh] mt-20   border-black  flex flex-col justify-between gap-4 2xl:gap-6 `}
       >
         <div className="border-b h-12">
           <form
@@ -178,13 +179,13 @@ export default function Home() {
         <div className="h-10">
           <p className=" -mt-5 border-b">{summaryText}</p>
         </div>
-        <div className="w-full h-full flex flex-col  border-yellow-400">
+        <div className="w-full h-full flex flex-col  border-yellow-400 ">
           <SettlementSummary
             settlementSummary={settlementDetails?.summary!}
             isLoading={isLoading}
           />
 
-          <section className="w-full h-full justify-between flex flex-col mt-5">
+          <section className="w-full h-full justify-between  flex flex-col mt-5">
             <div className="flex justify-between items-center">
               <ul className="flex flex-wrap text-sm font-medium text-center  border-gray-200">
                 {settlementTabs.map((tab) => (
@@ -198,7 +199,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="w-full bg-white  flex flex-col  border ">
+            <div className="w-full bg-white h-full flex flex-col  border ">
               {currentTab.title === "Routes" && (
                 <RoutesTab
                   isLoading={isLoading}
@@ -218,4 +219,21 @@ export default function Home() {
       </div>
     </AuthLayout>
   );
+}
+
+export async function getServerSideProps({ req }: any) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 }

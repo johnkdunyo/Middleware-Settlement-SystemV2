@@ -33,7 +33,6 @@ const instance = axios.create({
 
 
 instance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-instance.defaults.headers.common["BDP-APP-VERSION"] = "2.0.0";
 instance.defaults.headers.common["Content-Type"] = "application/json", 
 instance.defaults.headers.common["Accept"] = "application/json";
 instance.defaults.headers.common["Content-Type"] =  'multipart/form-data'
