@@ -43,7 +43,7 @@ export default function SettlementDetailsPage() {
 
   const [currentTab, setCurrenTab] = useState(settlementTabs[0]);
 
-  useEffect(() => {
+  const fetchData = async () => {
     setIsLoading(true);
     API.get(`/settlements/${settlementID}`)
       .then((response) => {
@@ -54,8 +54,18 @@ export default function SettlementDetailsPage() {
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
+
+  const refreshData = () => {
+    fetchData();
+  };
 
   const onSettleHandler = () => {
     API.put(`/settlements/${settlementID}`, { status: "settled" })
@@ -98,6 +108,8 @@ export default function SettlementDetailsPage() {
       >
         <SettlementStatusHeader
           status={settlementDetails?.canRollback ? "pending" : "settled"}
+          refreshData={refreshData}
+          isLoading={isLoading}
         />
         <SettlementSummary
           settlementSummary={settlementDetails?.summary!}

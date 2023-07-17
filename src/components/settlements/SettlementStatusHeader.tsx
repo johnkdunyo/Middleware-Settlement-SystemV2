@@ -3,7 +3,15 @@ import { useRouter } from "next/router";
 
 import React from "react";
 
-const SettlementStatusHeader = ({ status = "pending" }: { status: string }) => {
+const SettlementStatusHeader = ({
+  status = "pending",
+  refreshData,
+  isLoading,
+}: {
+  status: string;
+  refreshData: () => void;
+  isLoading: boolean;
+}) => {
   const router = useRouter();
 
   return (
@@ -18,10 +26,18 @@ const SettlementStatusHeader = ({ status = "pending" }: { status: string }) => {
           </span>
         </h1>
       </div>
-      <div>
-        <p className="border px-3 py-1 text-sm text-center bg-green-600 text-white rounded-2xl">
+      <div className="flex gap-3">
+        <p className="border px-3 py-1.5 text-sm text-center bg-green-600 text-white rounded-2xl">
           {status}
         </p>
+        <button
+          onClick={refreshData}
+          className={`border px-2 border-black rounded-lg text-sm ${
+            isLoading && "cursor-not-allowed"
+          } `}
+        >
+          {isLoading ? "Refreshing" : "Refresh"}
+        </button>
       </div>
     </section>
   );
